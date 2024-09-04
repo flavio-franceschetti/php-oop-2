@@ -1,7 +1,8 @@
 <?php 
-require_once __DIR__ . '/Model/CatProduct.php';
-require_once __DIR__ . '/Model/DogProduct.php';
 require_once __DIR__ . '/Model/Product.php';
+require_once __DIR__ . '//Model/Toy.php';
+require_once __DIR__ . '/Model/Accessory.php';
+require_once __DIR__ . '/Model/Food.php';
 require_once __DIR__ . '/data/db.php';
 
 ?>
@@ -15,23 +16,43 @@ require_once __DIR__ . '/data/db.php';
 </head>
 <body>
     <div class="container">
-        <h1>Esercizio</h1>
+        <h1>Pet Shop</h1>
+        <div class="d-flex gap-3">
+            <?php foreach($db as $product): ?>
+                <div class="card" style="width: 18rem;">
+                    <img src="img/<?php echo $product->getImage() ?>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $product->getName() ?></h5>
+                        <p class="card-text"><?php echo $product->getDescription() ?></p>
+                        <h6><?php echo $product->getPrice() ?>€</h6>
+                        <ul>
+                            <li>Type: <?php echo $product->getType() ?></li>
+                            <li>For: <?php echo $product->getAnimalType() ?></li>
+                            
+                            <!-- creo una condizione per la quale se product è un istanza di toy allora stampami gli attributi che sono in toy -->
+                            <?php if($product instanceof Toy): ?>
+                                <li>Material: <?php echo $product->getMaterial() ?></li>
+                                <li>Size: <?php echo $product->getSize() ?></li>
+                            <?php endif; ?>
 
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-            </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
+                            <!-- creo una condizione per la quale se product è un istanza di accessory allora stampami gli attributi di accessory -->
+                            <?php if($product instanceof Accessory): ?>
+                                <li>Category: <?php echo $product->getCategory() ?></li>
+                            <?php endif; ?>
+
+                            <!-- creo una condizione per la quale se product è un istanza di food allora stampami gli attributi di food -->
+                            <?php if($product instanceof Food): ?>
+                                <li>Flavor: <?php echo $product->getFlavor() ?></li>
+                                <li>Age group: <?php echo $product->getAgeGroup() ?></li>
+                            <?php endif; ?>
+                            
+                            
+
+                            
+                        </ul>
+                    </div>
+                </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </body>
