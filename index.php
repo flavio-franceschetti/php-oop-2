@@ -1,6 +1,6 @@
 <?php 
 require_once __DIR__ . '/Model/Product.php';
-require_once __DIR__ . '//Model/Toy.php';
+require_once __DIR__ . '/Model/Toy.php';
 require_once __DIR__ . '/Model/Accessory.php';
 require_once __DIR__ . '/Model/Food.php';
 require_once __DIR__ . '/data/db.php';
@@ -28,7 +28,7 @@ require_once __DIR__ . '/data/db.php';
                         <ul>
                             <li>Type: <?php echo $product->getType() ?></li>
                             <li>For: <?php echo $product->getAnimalType() ?></li>
-                            
+
                             <!-- creo una condizione per la quale se product è un istanza di toy allora stampami gli attributi che sono in toy -->
                             <?php if($product instanceof Toy): ?>
                                 <li>Material: <?php echo $product->getMaterial() ?></li>
