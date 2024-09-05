@@ -2,18 +2,18 @@
 // quindi ho un prodotto e devo estenderlo con le varie categorie che possono essere esempio giochi, cibo, accessori ecc.. e creo nuove classi per questo invece per il tipo basterebbe anche sono cane o gatto in stringa nel type. Ma per il tipo cane o gatto posso creare anche un istanza all interno di prodotto che mi riporta a quello dei cani o gatti dove inserisco le caratteristiche del prodotto per gli animali come ad esempio la fascia di età, la lunghezza del pelo, il livello di attività ecc...
 class Product {
    
-    public $type;         
-    public $price;
-    public $image;
-    public $name;
-    public $description;
-    public $animalType;
+    protected $type;         
+    protected $price;
+    protected $image;
+    protected $name;
+    protected $description;
+    protected $animalType;
 
     public function __construct($_name, $_price, $_image, $_type, $_animalType, $_description){
         $this->name = $_name;
         $this->price = $_price;
         $this->image = $_image;
-        $this->type = $_type;
+        $this->setType($_type);
         $this->animalType = $_animalType;
         $this->description = $_description;
     }
@@ -47,7 +47,18 @@ class Product {
     // all setter
     public function setType($_type){
         //si effettuano i controlli e una volta passati
-        $this->type = $_type;
+        // faccio un controllo che type sia una stringa
+        if(!is_string($_type)){
+            throw new Exception('Non è una stringa');
+        }
+        // creo un controllo per controllare che il tipo inserito sia fra quelli disponibili
+        $allowedType = ["Toy", "Accessory", "Food", "toy", "accessory", "food"];
+
+        if(!in_array($_type, $allowedType)){
+            throw new Exception('Non rientra nella lista dei tipi');
+        }
+
+        return $this->type = $_type;
     }
 
     public function setPrice($_price){
@@ -62,17 +73,17 @@ class Product {
 
     public function setName($_name){
         //si effettuano i controlli e una volta passati
-        $this->image = $_image;
+        $this->image = $_name;
     }
 
     public function setDescription($_description){
         //si effettuano i controlli e una volta passati
-        $this->image = $_image;
+        $this->image = $_description;
     }
 
     public function setAnimalType($_animalType){
         //si effettuano i controlli e una volta passati
-        $this->image = $_image;
+        $this->image = $_animalType;
     }
 }
     

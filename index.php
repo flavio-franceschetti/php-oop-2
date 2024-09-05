@@ -5,6 +5,22 @@ require_once __DIR__ . '/Model/Accessory.php';
 require_once __DIR__ . '/Model/Food.php';
 require_once __DIR__ . '/data/db.php';
 
+$ciboAsciutto = new Food("Premium Dog Food",     // Name
+        29.99,                  // Price
+        "dog_food.jpg",         // Image
+        "Food",                 // Type
+        "Dog",                  // Animal type
+        "High-quality dry food for adult dogs.", // Description
+        "Beef",                 // Flavor
+        "Adult",                // Age group)
+);
+
+try{
+    $ciboAsciutto->setType("ciao");
+} catch (Exception $e){
+    echo 'Errore il type: ' . $e->getMessage();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
