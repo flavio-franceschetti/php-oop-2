@@ -15,10 +15,17 @@ $ciboAsciutto = new Food("Premium Dog Food",     // Name
         "Adult",                // Age group)
 );
 
+// gestisco gli errori con try and catch
 try{
-    $ciboAsciutto->setType("ciao");
+    $ciboAsciutto->setType("food");
 } catch (Exception $e){
-    echo 'Errore il type: ' . $e->getMessage();
+    echo 'Errore: ' . $e->getMessage();
+}
+
+try{
+    $ciboAsciutto->setPrice('ciao');
+} catch (Exception $e){
+    echo 'Errore: ' . $e->getMessage();
 }
 
 ?>

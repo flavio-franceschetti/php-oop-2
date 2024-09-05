@@ -11,7 +11,7 @@ class Product {
 
     public function __construct($_name, $_price, $_image, $_type, $_animalType, $_description){
         $this->name = $_name;
-        $this->price = $_price;
+        $this->setPrice($_price);
         $this->image = $_image;
         $this->setType($_type);
         $this->animalType = $_animalType;
@@ -49,20 +49,25 @@ class Product {
         //si effettuano i controlli e una volta passati
         // faccio un controllo che type sia una stringa
         if(!is_string($_type)){
-            throw new Exception('Non è una stringa');
+            throw new Exception('Il type non è una stringa');
         }
         // creo un controllo per controllare che il tipo inserito sia fra quelli disponibili
         $allowedType = ["Toy", "Accessory", "Food", "toy", "accessory", "food"];
 
         if(!in_array($_type, $allowedType)){
-            throw new Exception('Non rientra nella lista dei tipi');
+            throw new Exception('Il type non rientra nella lista dei tipi');
         }
 
-        return $this->type = $_type;
+        $this->type = $_type;
     }
 
     public function setPrice($_price){
         //si effettuano i controlli e una volta passati
+        // effettuo un controllo se il prezzo è un float
+        if(!is_numeric($_price)){
+            throw new Exception('Il prezzo non è un numero');
+        }
+
         $this->price = $_price;
     }
 
